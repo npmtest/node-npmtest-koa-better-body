@@ -1,1 +1,39 @@
-{     "devDependencies": {         "electron-lite": "kaizhu256/node-electron-lite#alpha",         "utility2": "kaizhu256/node-utility2#alpha"     },     "name":"npmtest-koa-better-body",     "homepage": "https://github.com/npmtest/node-npmtest-koa-better-body",     "repository": {         "type": "git",         "url": "https://github.com/npmtest/node-npmtest-koa-better-body.git"     },     "scripts": {         "build-ci": "utility2 shReadmeTest build_ci.sh"     },     "version": "0.0.1" }
+{
+    "author": "kai zhu <kaizhu256@gmail.com>",
+    "description": "#### basic test coverage for  koa-better-body (v3.0.2)  [![npm package](https://img.shields.io/npm/v/npmtest-koa-better-body.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-koa-better-body) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-koa-better-body.svg)](https://travis-ci.org/npmtest/node-npmtest-koa-better-body)",
+    "devDependencies": {
+        "electron-lite": "kaizhu256/node-electron-lite#alpha",
+        "utility2": "kaizhu256/node-utility2#alpha"
+    },
+    "engines": {
+        "node": ">=4.0"
+    },
+    "homepage": "https://github.com/npmtest/node-npmtest-koa-better-body",
+    "keywords": [
+        "coverage",
+        "test",
+        "koa-better-body"
+    ],
+    "license": "MIT",
+    "main": "lib.npmtest_koa_better_body.js",
+    "name": "npmtest-koa-better-body",
+    "nameAlias": "npmtest_koa_better_body",
+    "nameOriginal": "npmtest-koa-better-body",
+    "os": [
+        "darwin",
+        "linux"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/npmtest/node-npmtest-koa-better-body.git"
+    },
+    "scripts": {
+        "build-ci": "utility2 shReadmeTest build_ci.sh",
+        "env": "env",
+        "heroku-postbuild": "npm install \"kaizhu256/node-utility2#alpha\" && utility2 shDeployHeroku",
+        "postinstall": "[ ! -f npm_scripts.sh ] || ./npm_scripts.sh postinstall",
+        "start": "PORT=${PORT:-8080} utility2 start test.js",
+        "test": "(set -e; export PORT=$(utility2 shServerPortRandom); utility2 test test.js)"
+    },
+    "version": "0.0.1"
+}
