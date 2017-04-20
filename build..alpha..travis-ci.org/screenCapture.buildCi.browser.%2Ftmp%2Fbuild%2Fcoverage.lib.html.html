@@ -1,0 +1,1057 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-koa-better-body/node_modules/koa-better-body/utils.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-koa-better-body">npmtest-koa-better-body (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-koa-better-body/node_modules/koa-better-body/utils.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">19.05% <small>(16 / 84)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 65)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 13)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">19.05% <small>(16 / 84)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> » <a href="index.html">node-npmtest-koa-better-body/node_modules/koa-better-body/</a> » utils.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict'
+&nbsp;
+/**
+ * Module dependencies
+ */
+&nbsp;
+var utils = require('lazy-cache')(require)
+&nbsp;
+/**
+ * Temporarily re-assign `require` to trick browserify and
+ * webpack into reconizing lazy dependencies.
+ *
+ * This tiny bit of ugliness has the huge dual advantage of
+ * only loading modules that are actually called at some
+ * point in the lifecycle of the application, whilst also
+ * allowing browserify and webpack to find modules that
+ * are depended on but never actually called.
+ */
+&nbsp;
+var fn = require
+require = utils // eslint-disable-line no-undef, no-native-reassign, no-global-assign
+&nbsp;
+/**
+ * Lazily required module dependencies
+ */
+&nbsp;
+require('extend-shallow', 'extend')
+require('formidable')
+require('koa-body-parsers', 'bodyParsers')
+require('querystring')
+&nbsp;
+/**
+ * Restore `require`
+ */
+&nbsp;
+require = fn // eslint-disable-line no-undef, no-native-reassign, no-global-assign
+&nbsp;
+/**
+ * &gt; Patch querystring logic. By default uses node's
+ * built-in `querystring` module, otherwise that is
+ * provided from `opts.querystring`. Works well with
+ * the `qs` module. You can pass it like that
+ *
+ * **Example**
+ *
+ * ```js
+ * app.use(body({
+ *   querystring: require('qs')
+ * }))
+ * ```
+ *
+ * @param  {String} `str` querystring
+ * @param  {Object} `opts` loaded options
+ * @return {Object} parsed querystring object
+ * @api private
+ */
+utils.parseQs = <span class="fstat-no" title="function not covered">function parseQs (str, opts) {</span>
+<span class="cstat-no" title="statement not covered">  return opts.querystring</span>
+    ? opts.querystring.parse(str, opts)
+    : utils.querystring.parse(str, opts.delimiter, '=', opts)
+}
+&nbsp;
+/**
+ * &gt; Default options that will be loaded. Pass `options` to overwrite them.
+ *
+ * @param  {Object} `options`
+ * @return {Object}
+ * @api private
+ */
+utils.defaultOptions = <span class="fstat-no" title="function not covered">function defaultOptions (options) {</span>
+<span class="cstat-no" title="statement not covered">  options = typeof options === 'object' ? options : {}</span>
+<span class="cstat-no" title="statement not covered">  var types = utils.defaultTypes(options.extendTypes)</span>
+<span class="cstat-no" title="statement not covered">  options = utils.extend({</span>
+    fields: false,
+    files: false,
+    multipart: true,
+    textLimit: false,
+    formLimit: false,
+    jsonLimit: false,
+    jsonStrict: true,
+    detectJSON: false,
+    bufferLimit: false,
+    buffer: false,
+    strict: true,
+&nbsp;
+    // query string `parse` options
+    delimiter: '&amp;',
+    decodeURIComponent: utils.querystring.unescape,
+    maxKeys: 1000
+  }, options)
+&nbsp;
+<span class="cstat-no" title="statement not covered">  options.delimiter = options.sep || options.delimiter</span>
+<span class="cstat-no" title="statement not covered">  options.formLimit = options.formLimit || options.urlencodedLimit</span>
+<span class="cstat-no" title="statement not covered">  options.extendTypes = types</span>
+<span class="cstat-no" title="statement not covered">  options.onerror = options.onЕrror || options.onerror</span>
+<span class="cstat-no" title="statement not covered">  options.onerror = typeof options.onerror === 'function'</span>
+    ? options.onerror
+    : false
+<span class="cstat-no" title="statement not covered">  options.delimiter = typeof options.delimiter === 'string'</span>
+    ? options.delimiter
+    : '&amp;'
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (typeof options.handler !== 'function') {</span>
+<span class="cstat-no" title="statement not covered">    options.handler = <span class="fstat-no" title="function not covered">function * noopHandler () {</span>}</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (typeof options.detectJSON !== 'function') {</span>
+<span class="cstat-no" title="statement not covered">    options.detectJSON = <span class="fstat-no" title="function not covered">function detectJSON () {</span></span>
+<span class="cstat-no" title="statement not covered">      return false</span>
+    }
+  }
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return options</span>
+}
+&nbsp;
+/**
+ * &gt; Only extend/overwrite default accept types.
+ *
+ * @param  {Object} `types`
+ * @return {Object}
+ * @api private
+ */
+utils.defaultTypes = <span class="fstat-no" title="function not covered">function defaultTypes (types) {</span>
+<span class="cstat-no" title="statement not covered">  types = typeof types === 'object' ? types : {}</span>
+<span class="cstat-no" title="statement not covered">  return utils.extend({</span>
+    multipart: [
+      'multipart/form-data'
+    ],
+    text: [
+      'text/*'
+    ],
+    form: [
+      'application/x-www-form-urlencoded'
+    ],
+    json: [
+      'application/json',
+      'application/json-patch+json',
+      'application/vnd.api+json',
+      'application/csp-report'
+    ],
+    buffer: [
+      'text/*'
+    ]
+  }, types)
+}
+&nbsp;
+/**
+ * &gt; Is "valid" request method, according to IETF Draft.
+ *
+ * @see   https://tools.ietf.org/html/draft-ietf-httpbis-p2-semantics-19#section-6.1
+ * @param  {String} `method` koa request method
+ * @return {Boolean}
+ * @api private
+ */
+utils.isValid = <span class="fstat-no" title="function not covered">function isValid (method) {</span>
+<span class="cstat-no" title="statement not covered">  return ['GET', 'HEAD', 'DELETE'].indexOf(method.toUpperCase()) === -1</span>
+}
+&nbsp;
+/**
+ * &gt; Add `koa-body-parsers` to the koa context. In addition
+ * also adds the formidable as multipart parser.
+ *
+ * @param  {Object} `ctx` koa context
+ * @param  {Object} `opts` default options
+ * @return {Object} `ctx` koa context
+ * @api private
+ */
+utils.setParsers = <span class="fstat-no" title="function not covered">function setParsers (ctx, opts) {</span>
+<span class="cstat-no" title="statement not covered">  ctx.app.querystring = opts.querystring ||</span>
+    opts.qs || // alias
+    ctx.app &amp;&amp; ctx.app.querystring ||
+    ctx.app &amp;&amp; ctx.app.qs || // alias
+    ctx.querystring ||
+    ctx.qs // alias
+&nbsp;
+<span class="cstat-no" title="statement not covered">  utils.bodyParsers(ctx)</span>
+<span class="cstat-no" title="statement not covered">  ctx.request.multipart = utils.multipart.bind(ctx)</span>
+<span class="cstat-no" title="statement not covered">  return ctx</span>
+}
+&nbsp;
+/**
+ * &gt; Formidable wrapper as multipart parser to make
+ * thunk that later can be yielded. Also allows you to pass
+ * formidable.IncomingForm instance to `options.IncomingForm`.
+ *
+ * @param  {Object} `options` passed or default plugin options
+ * @param  {Object} `ctx` koa context
+ * @return {Function} thunk
+ * @api private
+ */
+utils.multipart = <span class="fstat-no" title="function not covered">function multipart (options) {</span>
+<span class="cstat-no" title="statement not covered">  var ctx = this</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  return <span class="fstat-no" title="function not covered">function thunk (done) {</span></span>
+<span class="cstat-no" title="statement not covered">    var buff = ''</span>
+<span class="cstat-no" title="statement not covered">    var fields = {}</span>
+<span class="cstat-no" title="statement not covered">    var files = []</span>
+<span class="cstat-no" title="statement not covered">    var form = options.IncomingForm instanceof utils.formidable.IncomingForm</span>
+      ? options.IncomingForm
+      : new utils.formidable.IncomingForm(options)
+&nbsp;
+<span class="cstat-no" title="statement not covered">    form.on('error', done)</span>
+<span class="cstat-no" title="statement not covered">    form.on('aborted', done)</span>
+<span class="cstat-no" title="statement not covered">    form.on('file', <span class="fstat-no" title="function not covered">function (name, value) {</span></span>
+<span class="cstat-no" title="statement not covered">      files.push(value)</span>
+<span class="cstat-no" title="statement not covered">      fields[name] = fields[name] || []</span>
+<span class="cstat-no" title="statement not covered">      fields[name].push(value)</span>
+    })
+<span class="cstat-no" title="statement not covered">    form.on('field', <span class="fstat-no" title="function not covered">function (name, value) {</span></span>
+<span class="cstat-no" title="statement not covered">      buff += name + '=' + value + options.delimiter</span>
+    })
+<span class="cstat-no" title="statement not covered">    form.on('end', <span class="fstat-no" title="function not covered">function () {</span></span>
+<span class="cstat-no" title="statement not covered">      fields = buff &amp;&amp; buff.length</span>
+        ? utils.extend({}, utils.parseQs(buff.slice(0, -1), options), fields)
+        : fields
+&nbsp;
+<span class="cstat-no" title="statement not covered">      done(null, {</span>
+        fields: fields,
+        files: files
+      })
+    })
+<span class="cstat-no" title="statement not covered">    form.parse(ctx.req)</span>
+  }
+}
+&nbsp;
+/**
+ * &gt; Parse a different type of request bodies. By default accepts
+ * and can parse JSON, JSON-API, JSON-Patch, text, form, urlencoded
+ * and buffer bodies.
+ *
+ * @param {Object}   `ctx` koa context
+ * @param {Object}   `options` plugin options
+ * @param {Function} `next` next middleware
+ * @api private
+ */
+utils.parseBody = <span class="fstat-no" title="function not covered">function * parseBody (ctx, options, next) {</span> /* eslint complexity: [2, 12] */
+<span class="cstat-no" title="statement not covered">  var fields = typeof options.fields === 'string' ? options.fields : 'fields'</span>
+<span class="cstat-no" title="statement not covered">  var files = typeof options.files === 'string' ? options.files : 'files'</span>
+<span class="cstat-no" title="statement not covered">  var custom = options.extendTypes.custom</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">  if (custom &amp;&amp; custom.length &amp;&amp; ctx.request.is(custom)) {</span>
+<span class="cstat-no" title="statement not covered">    yield * options.handler.call(ctx, ctx, options, next)</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (options.detectJSON(ctx) || ctx.request.is(options.extendTypes.json)) {</span>
+<span class="cstat-no" title="statement not covered">    ctx.app.jsonStrict = typeof options.jsonStrict === 'boolean' ? options.jsonStrict : true</span>
+<span class="cstat-no" title="statement not covered">    ctx.request[fields] = yield ctx.request.json(options.jsonLimit)</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (ctx.request.is(options.extendTypes.form || options.extendTypes.urlencoded)) {</span>
+<span class="cstat-no" title="statement not covered">    var res = yield ctx.request.urlencoded(options.formLimit)</span>
+<span class="cstat-no" title="statement not covered">    ctx.request[fields] = res</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (options.buffer &amp;&amp; ctx.request.is(options.extendTypes.buffer)) {</span>
+<span class="cstat-no" title="statement not covered">    ctx.request.body = yield ctx.request.buffer(options.bufferLimit)</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (ctx.request.is(options.extendTypes.text)) {</span>
+<span class="cstat-no" title="statement not covered">    var limit = options.textLimit</span>
+<span class="cstat-no" title="statement not covered">    var body = yield ctx.request.text(limit)</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    ctx.request.body = body</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+<span class="cstat-no" title="statement not covered">  if (options.multipart &amp;&amp; ctx.request.is(options.extendTypes.multipart)) {</span>
+<span class="cstat-no" title="statement not covered">    var result = yield ctx.request.multipart(options)</span>
+<span class="cstat-no" title="statement not covered">    ctx.request[fields] = result.fields</span>
+<span class="cstat-no" title="statement not covered">    ctx.request[files] = result.files</span>
+<span class="cstat-no" title="statement not covered">    return yield * next</span>
+  }
+}
+&nbsp;
+/**
+ * Expose `utils` modules
+ */
+&nbsp;
+module.exports = utils
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 16:49:50 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
